@@ -38,6 +38,11 @@ public abstract class Screen{
     return objects;
   }
 
+  public void initObjects(){
+    for(GameObject o : objects){
+      o.initialize();
+    }
+  }
   /**
    * @return negative (<0) if not done, and the index of the desired screen if done
    */

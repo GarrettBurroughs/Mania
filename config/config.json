@@ -1,0 +1,5 @@
+{
+  "skin" : "config/defaultSkin.json",
+  "scrollSpeed" : 4,
+  "keyConfig" : "askl"
+}
