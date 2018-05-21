@@ -32,12 +32,18 @@ static char key4;
 static final float target = 100;
 static double judgingScale = 100;
 static ArrayList<Note> enabledNotes;
+public Samples sample;
 
 public void setup(){
   // Set up processing vars
   
   background(255);
-
+  SoundFile soundSample1 = new SoundFile(this, "c5.mp3");
+  SoundFile soundSample2 = new SoundFile(this, "d5.mp3");
+  SoundFile soundSample3 = new SoundFile(this, "e5.mp3");
+  SoundFile soundSample4 = new SoundFile(this, "f5.mp3");
+  sample = new Samples(soundSample1, soundSample2, soundSample3, soundSample4);
+  sample.hitSound1.play();
   // Load skin and configuation files
   config = loadJSONObject("config/config.json");
   String skinFile = config.getString("skin");
@@ -57,7 +63,7 @@ public void setup(){
 
   // double time, int note, double duration, double scrollSpeed, Samples sample
   for(int i = 0; i < 100; i++){
-    s.addObject(new Note(i * 250, floor(random(1, 5)), 0, 100, null));
+    s.addObject(new Note(i * 250, floor(random(1, 5)), 0, 100, sample));
   }
   s.initObjects();
   counter = 1;
@@ -169,7 +175,7 @@ public class Note implements GameObject{
       position += speed;
     }
     if(position > height){
-      enabled  = false;
+      enabled = false;
       enabledNotes.remove(this);
     }
   }
@@ -180,7 +186,24 @@ public class Note implements GameObject{
 
   public void clicked(){
     enabled = false;
-    
+    if(sample != null){
+        switch(note){
+          case 1:
+            sample.hitSound1.play();
+            break;
+          case 2:
+            sample.hitSound2.play();
+            break;
+          case 3:
+            sample.hitSound3.play();
+            break;
+          case 4:
+            sample.hitSound4.play();
+            break;
+          default:
+            break;
+      }
+    }
   }
 
   public void render(){
@@ -218,11 +241,11 @@ public class Note implements GameObject{
   }
 }
 public class Samples{
-  public File hitSound1;
-  public File hitSound2;
-  public File hitSound3;
-  public File hitSound4;
-  public Samples(File hitSound1, File hitSound2, File hitSound3, File hitSound4){
+  public SoundFile hitSound1;
+  public SoundFile hitSound2;
+  public SoundFile hitSound3;
+  public SoundFile hitSound4;
+  public Samples(SoundFile hitSound1, SoundFile hitSound2, SoundFile hitSound3, SoundFile hitSound4){
     this.hitSound1 = hitSound1;
     this.hitSound2 = hitSound2;
     this.hitSound3 = hitSound3;

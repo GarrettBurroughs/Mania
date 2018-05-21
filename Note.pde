@@ -56,6 +56,24 @@ public class Note implements GameObject{
 
   public void clicked(){
     enabled = false;
+    if(sample != null){
+        switch(note){
+          case 1:
+            sample.hitSound1.play();
+            break;
+          case 2:
+            sample.hitSound2.play();
+            break;
+          case 3:
+            sample.hitSound3.play();
+            break;
+          case 4:
+            sample.hitSound4.play();
+            break;
+          default:
+            break;
+      }
+    }
   }
 
   public void render(){
