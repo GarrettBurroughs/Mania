@@ -38,11 +38,12 @@ public void setup(){
   // Set up processing vars
   
   background(255);
-  SoundFile soundSample1 = new SoundFile(this, "c5.mp3");
-  SoundFile soundSample2 = new SoundFile(this, "d5.mp3");
-  SoundFile soundSample3 = new SoundFile(this, "e5.mp3");
-  SoundFile soundSample4 = new SoundFile(this, "f5.mp3");
-  sample = new Samples(soundSample1, soundSample2, soundSample3, soundSample4);
+  SoundFile soundSample1 = new SoundFile(this, "soft-hitwhistle.mp3");
+  SoundFile soundSample2 = new SoundFile(this, "soft-hitfinish.wav");
+  // SoundFile soundSample2 = new SoundFile(this, "d5.mp3");
+  // SoundFile soundSample3 = new SoundFile(this, "e5.mp3");
+  // SoundFile soundSample4 = new SoundFile(this, "f5.mp3");
+  sample = new Samples(soundSample2, soundSample1, soundSample1, soundSample2);
   sample.hitSound1.play();
   // Load skin and configuation files
   config = loadJSONObject("config/config.json");
