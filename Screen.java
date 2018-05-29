@@ -3,8 +3,14 @@ import java.util.ArrayList;
 
 public abstract class Screen{
   private ArrayList<GameObject> objects = new ArrayList<>();
+
   public abstract void screenUpdate();
+
   public abstract void display();
+
+  public abstract int isDone();
+
+  public abstract void pressed(char c);
 
   public Screen(){
   }
@@ -43,11 +49,5 @@ public abstract class Screen{
       o.initialize();
     }
   }
-  /**
-   * @return negative (<0) if not done, and the index of the desired screen if done
-   */
-  public abstract int isDone();
 
-
-  public abstract void pressed(char c);
 }
