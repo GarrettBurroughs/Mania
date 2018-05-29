@@ -5,8 +5,8 @@ public class BeatMap{
   String artist;
   int previewPoint;
 
-  public BeatMap(String beatmapFile, String difficulty){
-    JSONObject mapReader = loadJSONObject(beatmapFile);
+  public BeatMap(String name, String difficulty){
+    JSONObject mapReader = loadJSONObject("beatmaps/" + name + "/beatmap.json");
     JSONObject diffReader = loadJSONObject(difficulty);
     String filePath = "beatmaps/" + mapReader.getString("BeatMapName");
     song = new SoundFile(new StepMania(), filePath + "/" + mapReader.getString("SoundFile"));

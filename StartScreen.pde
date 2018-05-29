@@ -1,11 +1,11 @@
-class SongSelectScreen extends Screen{
+class StartScreen extends Screen{
 
   public void screenUpdate(){
 
   }
 
   public void display(){
-
+    
   }
 
   public int isDone(){

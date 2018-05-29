@@ -8,7 +8,9 @@ class SongSelection implements GameObject{
   boolean playing = false;
 
 
-  public void initialize(){}
+  public void initialize(){
+
+  }
 
   public void update(){
     if(selected && !playing){
@@ -25,9 +27,9 @@ class SongSelection implements GameObject{
 
   public void render(){
     if(selected){
-      rect();
+      rect(width - selectedSize, index * thickness, selectedSize, thickness);
     }else{
-        rect(width - size, index * size, size, thickness);
+      rect(width - size, index * size, size, thickness);
     }
   }
 }

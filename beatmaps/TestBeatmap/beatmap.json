@@ -1,15 +1,15 @@
 {
-  "BeatMapName" : "",
-  "BeatMapCreator" : "",
-  "Artist" : "",
-  "SongName" : "",
-  "SoundFile" : "",
-  "previewPoint" : 0,
+  "BeatMapName" : "TestBeatmap",
+  "BeatMapCreator" : "Animelord9999",
+  "Artist" : "Animelord9999",
+  "SongName" : "Test Time!",
+  "SoundFile" : "TestBeatmapSong.mp3",
+  "previewPoint" : 3,
   "Difficulties" : [
-    ""
+    "test"
   ],
-  "Hitsound1" : "",
-  "Hitsound2" : "",
-  "Hitsound3" : "",
-  "Hitsound4" : ""
+  "Hitsound1" : "soft-hitfinish.wav",
+  "Hitsound2" : "soft-hitwhistle.mp3",
+  "Hitsound3" : "soft-hitwhistle.mp3",
+  "Hitsound4" : "soft-hitfinish.wav"
 }

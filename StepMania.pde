@@ -2,7 +2,7 @@ import processing.sound.*;
 
 // STEP MANIA REPLICA
 
-Screen s;
+static Screen currentScreen;
 JSONObject config;
 JSONObject skin;
 int counter;
@@ -41,24 +41,25 @@ void setup(){
   key4 = keyConfig.charAt(3);
 
 
-  s = new GameplayScreen();
+  currentScreen = new GameplayScreen();
   enabledNotes = new ArrayList();
 
   // double time, int note, double duration, double scrollSpeed, Samples sample
   for(int i = 0; i < 100; i++){
-    s.addObject(new Note(i * 250, floor(random(1, 5)), 0, 100, sample));
+    currentScreen.addObject(new Note(i * 250, floor(random(1, 5)), 0, 100, sample));
   }
-  s.initObjects();
+  currentScreen.initObjects();
   counter = 1;
   startTime = millis();
+  BeatMap test = new BeatMap("TestBeatmap/beatmap.json", "hard.json");
 }
 
 void draw(){
-  s.update();
-  s.display();
-  s.renderObjects();
+  currentScreen.update();
+  currentScreen.display();
+  currentScreen.renderObjects();
 }
 
 void keyPressed(){
-  s.pressed(key);
+  currentScreen.pressed(key);
 }
