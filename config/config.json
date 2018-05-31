@@ -1,7 +1,7 @@
 {
   "skin" : "config/defaultSkin.json",
   "scrollSpeed" : 4,
-  "keyConfig" : "fghj",
+  "keyConfig" : "asl;",
   "keySelectUP" : "x",
   "keySelectDown" : "z"
 }

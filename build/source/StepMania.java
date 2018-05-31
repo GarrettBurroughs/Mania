@@ -33,6 +33,7 @@ static final float target = 100;
 static double judgingScale = 100;
 static ArrayList<Note> enabledNotes;
 public Samples sample;
+public static SoundFile currentSong;
 
 public void setup(){
   // Set up processing vars
@@ -40,11 +41,12 @@ public void setup(){
   background(255);
   SoundFile soundSample1 = new SoundFile(this, "soft-hitwhistle.mp3");
   SoundFile soundSample2 = new SoundFile(this, "soft-hitfinish.wav");
+  //SoundFile song = new SoundFile(this, "beatmaps/TestBeatmap/TestBeatmapSong.mp3");
   // SoundFile soundSample2 = new SoundFile(this, "d5.mp3");
   // SoundFile soundSample3 = new SoundFile(this, "e5.mp3");
   // SoundFile soundSample4 = new SoundFile(this, "f5.mp3");
   sample = new Samples(soundSample2, soundSample1, soundSample1, soundSample2);
-  sample.hitSound1.play();
+  // sample.hitSound1.play();
   // Load skin and configuation files
   config = loadJSONObject("config/config.json");
   String skinFile = config.getString("skin");
@@ -69,7 +71,7 @@ public void setup(){
   currentScreen.initObjects();
   counter = 1;
   startTime = millis();
-  BeatMap test = new BeatMap("TestBeatmap/beatmap.json", "hard.json");
+  BeatMap test = new BeatMap(this, "TestBeatmap", "hard.json");
 }
 
 public void draw(){
@@ -81,6 +83,11 @@ public void draw(){
 public void keyPressed(){
   currentScreen.pressed(key);
 }
+
+public void playSong(){
+  println("Thread Running");
+  currentSong.play();
+}
 public class BeatMap{
   SoundFile song;
   Note[] notes;
@@ -88,11 +95,14 @@ public class BeatMap{
   String artist;
   int previewPoint;
 
-  public BeatMap(String name, String difficulty){
-    JSONObject mapReader = loadJSONObject("beatmaps/" + name + "/beatmap.json");
-    JSONObject diffReader = loadJSONObject(difficulty);
-    String filePath = "beatmaps/" + mapReader.getString("BeatMapName");
-    song = new SoundFile(new StepMania(), filePath + "/" + mapReader.getString("SoundFile"));
+  public BeatMap(StepMania parent, String name, String difficulty){
+    String path = "beatmaps/" + name + "/";
+    JSONObject mapReader = loadJSONObject(path + "beatmap.json");
+    JSONObject diffReader = loadJSONObject(path + difficulty);
+    song = new SoundFile(parent, path + mapReader.getString("SoundFile"));
+    StepMania.currentSong = song;
+    thread("playSong");
+    println(path + mapReader.getString("SoundFile"));
     name = mapReader.getString("SongName");
     artist = mapReader.getString("Artist");
     previewPoint = mapReader.getInt("previewPoint");
