@@ -47,13 +47,16 @@ void setup(){
   enabledNotes = new ArrayList();
 
   // double time, int note, double duration, double scrollSpeed, Samples sample
-  for(int i = 0; i < 100; i++){
-    currentScreen.addObject(new Note(i * 250, floor(random(1, 5)), 0, 100, sample));
-  }
+  // for(int i = 0; i < 100; i++){
+  //   currentScreen.addObject(new Note(i * 250, floor(random(1, 5)), 0, 100, sample));
+  // }
   currentScreen.initObjects();
   counter = 1;
   startTime = millis();
   BeatMap test = new BeatMap(this, "TestBeatmap", "hard.json");
+  for(Note n : test.getNotes()){
+    currentScreen.addObject(n);
+  }
 }
 
 void draw(){

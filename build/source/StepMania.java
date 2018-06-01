@@ -65,13 +65,16 @@ public void setup(){
   enabledNotes = new ArrayList();
 
   // double time, int note, double duration, double scrollSpeed, Samples sample
-  for(int i = 0; i < 100; i++){
-    currentScreen.addObject(new Note(i * 250, floor(random(1, 5)), 0, 100, sample));
-  }
+  // for(int i = 0; i < 100; i++){
+  //   currentScreen.addObject(new Note(i * 250, floor(random(1, 5)), 0, 100, sample));
+  // }
   currentScreen.initObjects();
   counter = 1;
   startTime = millis();
   BeatMap test = new BeatMap(this, "TestBeatmap", "hard.json");
+  for(Note n : test.getNotes()){
+    currentScreen.addObject(n);
+  }
 }
 
 public void draw(){
@@ -90,12 +93,14 @@ public void playSong(){
 }
 public class BeatMap{
   SoundFile song;
-  Note[] notes;
+  ArrayList<Note> notes;
   String name;
   String artist;
   int previewPoint;
+  int scrollSpeed = 100;
 
   public BeatMap(StepMania parent, String name, String difficulty){
+    notes = new ArrayList();
     String path = "beatmaps/" + name + "/";
     JSONObject mapReader = loadJSONObject(path + "beatmap.json");
     JSONObject diffReader = loadJSONObject(path + difficulty);
@@ -106,12 +111,28 @@ public class BeatMap{
     name = mapReader.getString("SongName");
     artist = mapReader.getString("Artist");
     previewPoint = mapReader.getInt("previewPoint");
-    /*Samples s = new Samples(
-      mapReader.getString("soundSample1"),
-      mapReader.getString("soundSample2"),
-      mapReader.getString("soundSample3"),
-      mapReader.getString("soundSample4"),
-    );*/
+    Samples s = new Samples(
+      new SoundFile(parent, path + mapReader.getString("Hitsound1")),
+      new SoundFile(parent, path + mapReader.getString("Hitsound2")),
+      new SoundFile(parent, path + mapReader.getString("Hitsound3")),
+      new SoundFile(parent, path + mapReader.getString("Hitsound4"))
+    );
+    JSONArray beatmapNotes = diffReader.getJSONArray("notes");
+    for (int i = 0; i < beatmapNotes.size(); i++) {
+      JSONObject beatmapNote = beatmapNotes.getJSONObject(i);
+      // double time, int note, double duration, double scrollSpeed, Samples sample
+      notes.add(new Note(
+        beatmapNote.getInt("offset"),
+        beatmapNote.getInt("key"),
+        0, // TODO : IMPLEMENT DURATION
+        scrollSpeed,
+        s
+        ));
+    }
+  }
+
+  public Note[] getNotes(){
+    return notes.toArray(new Note[notes.size()]);
   }
 }
 public abstract class Button implements GameObject
