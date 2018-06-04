@@ -31,7 +31,7 @@ public class BeatMap{
       notes.add(new Note(
         beatmapNote.getInt("offset"),
         beatmapNote.getInt("key"),
-        0, // TODO : IMPLEMENT DURATION
+        beatmapNote.getInt("duration"),
         scrollSpeed,
         s
         ));

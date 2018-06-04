@@ -2,11 +2,13 @@
   "notes" : [
     {
       "key" : 1,
-      "offset" : 1000
+      "offset" : 1000,
+      "duration" : 0
     },
     {
-      "key" : 1,
-      "offset" : 1000
+      "key" : 2,
+      "offset" : 1500,
+      "duration" : 1000
     }
   ]
 }

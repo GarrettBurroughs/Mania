@@ -124,7 +124,7 @@ public class BeatMap{
       notes.add(new Note(
         beatmapNote.getInt("offset"),
         beatmapNote.getInt("key"),
-        0, // TODO : IMPLEMENT DURATION
+        beatmapNote.getInt("duration"),
         scrollSpeed,
         s
         ));
@@ -251,7 +251,7 @@ public class Note implements GameObject{
   Samples sample; // Soundset for notes
   float position; // Y coordinate of the note
   float speed; // How fast the note should move down the screen
-  final int size = 10; // Size of a standard note
+  int size = 10; // Size of a standard note
   double scrollSpeed;
   boolean enabled = false; // True when on screen
   boolean loaded = false;
@@ -266,9 +266,12 @@ public class Note implements GameObject{
     this.time = time;
     this.note = note;
     this.duration = duration;
-    this.startTime = time - 1 / scrollSpeed * 1000;
+    this.startTime = time + duration - 1 / scrollSpeed * 1000;
     this.sample = sample;
     this.scrollSpeed = scrollSpeed;
+    if(duration > 1){
+      size = (int)duration;
+    }
     initialize();
   }
 
