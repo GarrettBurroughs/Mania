@@ -21,7 +21,8 @@ public class Note implements GameObject{
     this.time = time;
     this.note = note;
     this.duration = duration;
-    this.startTime = time + duration - 1 / scrollSpeed * 1000;
+    //this.startTime = time - 1 / scrollSpeed * 1000;
+    this.startTime = time - (height / scrollSpeed);
     this.sample = sample;
     this.scrollSpeed = scrollSpeed;
     if(duration > 1){
@@ -38,11 +39,11 @@ public class Note implements GameObject{
   }
 
   public void update(){
-    if(millis() - StepMania.startTime > this.startTime && !loaded){
+    if(millis() - stepmania.startTime > this.startTime && !loaded){
       enabled = true;
       position = (float)(-size);
       loaded = true;
-      StepMania.enabledNotes.add(this);
+      stepmania.enabledNotes.add(this);
     }
     if(enabled){
       position += speed;
@@ -110,6 +111,6 @@ public class Note implements GameObject{
   }
 
   public boolean canClick(){
-    return abs(position - (target + width)) < StepMania.judgingScale;
+    return abs(position - (target + width)) < stepmania.judgingScale;
   }
 }

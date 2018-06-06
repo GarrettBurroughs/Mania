@@ -4,15 +4,15 @@ public class BeatMap{
   String name;
   String artist;
   int previewPoint;
-  int scrollSpeed = 200;
+  int scrollSpeed = 100;
 
-  public BeatMap(StepMania parent, String name, String difficulty){
+  public BeatMap(stepmania parent, String name, String difficulty){
     notes = new ArrayList();
     String path = "beatmaps/" + name + "/";
     JSONObject mapReader = loadJSONObject(path + "beatmap.json");
     JSONObject diffReader = loadJSONObject(path + difficulty);
     song = new SoundFile(parent, path + mapReader.getString("SoundFile"));
-    StepMania.currentSong = song;
+    stepmania.currentSong = song;
     thread("playSong");
     println(path + mapReader.getString("SoundFile"));
     name = mapReader.getString("SongName");

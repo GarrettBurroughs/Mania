@@ -21,6 +21,7 @@ void setup(){
   // Set up processing vars
   size(400, 600);
   background(255);
+  frameRate(144);
   SoundFile soundSample1 = new SoundFile(this, "soft-hitwhistle.mp3");
   SoundFile soundSample2 = new SoundFile(this, "soft-hitfinish.wav");
   //SoundFile song = new SoundFile(this, "beatmaps/TestBeatmap/TestBeatmapSong.mp3");

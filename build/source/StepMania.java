@@ -14,7 +14,7 @@ import java.io.InputStream;
 import java.io.OutputStream; 
 import java.io.IOException; 
 
-public class StepMania extends PApplet {
+public class stepmania extends PApplet {
 
 
 
@@ -39,6 +39,7 @@ public void setup(){
   // Set up processing vars
   
   background(255);
+  frameRate(144);
   SoundFile soundSample1 = new SoundFile(this, "soft-hitwhistle.mp3");
   SoundFile soundSample2 = new SoundFile(this, "soft-hitfinish.wav");
   //SoundFile song = new SoundFile(this, "beatmaps/TestBeatmap/TestBeatmapSong.mp3");
@@ -98,15 +99,15 @@ public class BeatMap{
   String name;
   String artist;
   int previewPoint;
-  int scrollSpeed = 200;
+  int scrollSpeed = 100;
 
-  public BeatMap(StepMania parent, String name, String difficulty){
+  public BeatMap(stepmania parent, String name, String difficulty){
     notes = new ArrayList();
     String path = "beatmaps/" + name + "/";
     JSONObject mapReader = loadJSONObject(path + "beatmap.json");
     JSONObject diffReader = loadJSONObject(path + difficulty);
     song = new SoundFile(parent, path + mapReader.getString("SoundFile"));
-    StepMania.currentSong = song;
+    stepmania.currentSong = song;
     thread("playSong");
     println(path + mapReader.getString("SoundFile"));
     name = mapReader.getString("SongName");
@@ -220,7 +221,7 @@ public class GameplayScreen extends Screen{
     fill(outsideColor);
     rect(5 * width / 6, 0, width / 6, height);
     fill(judgingLineColor);
-    rect(1 * width / 6, height - StepMania.target, 4 * width / 6, 10);
+    rect(1 * width / 6, height - stepmania.target, 4 * width / 6, 10);
   }
 
   public int isDone(){
@@ -228,17 +229,17 @@ public class GameplayScreen extends Screen{
   }
 
   public void pressed(char c){
-    for(Note n : StepMania.enabledNotes){
-      if(c == StepMania.key1 && n.note == 1 && n.canClick()){
+    for(Note n : stepmania.enabledNotes){
+      if(c == stepmania.key1 && n.note == 1 && n.canClick()){
         n.clicked();
       }
-      if(c == StepMania.key2 && n.note == 2 && n.canClick()){
+      if(c == stepmania.key2 && n.note == 2 && n.canClick()){
         n.clicked();
       }
-      if(c == StepMania.key3 && n.note == 3 && n.canClick()){
+      if(c == stepmania.key3 && n.note == 3 && n.canClick()){
         n.clicked();
       }
-      if(c == StepMania.key4 && n.note == 4 && n.canClick()){
+      if(c == stepmania.key4 && n.note == 4 && n.canClick()){
         n.clicked();
       }
     }
@@ -267,7 +268,8 @@ public class Note implements GameObject{
     this.time = time;
     this.note = note;
     this.duration = duration;
-    this.startTime = time + duration - 1 / scrollSpeed * 1000;
+    //this.startTime = time - 1 / scrollSpeed * 1000;
+    this.startTime = time - (height / scrollSpeed);
     this.sample = sample;
     this.scrollSpeed = scrollSpeed;
     if(duration > 1){
@@ -284,11 +286,11 @@ public class Note implements GameObject{
   }
 
   public void update(){
-    if(millis() - StepMania.startTime > this.startTime && !loaded){
+    if(millis() - stepmania.startTime > this.startTime && !loaded){
       enabled = true;
       position = (float)(-size);
       loaded = true;
-      StepMania.enabledNotes.add(this);
+      stepmania.enabledNotes.add(this);
     }
     if(enabled){
       position += speed;
@@ -356,7 +358,7 @@ public class Note implements GameObject{
   }
 
   public boolean canClick(){
-    return abs(position - (target + width)) < StepMania.judgingScale;
+    return abs(position - (target + width)) < stepmania.judgingScale;
   }
 }
 public class Samples{
@@ -383,7 +385,7 @@ public class screenSwitchButton extends Button
   {
     if(mouseX<=x+boxWidth/2 && mouseX>=x-boxWidth/2 && mouseY<=y+boxHeight/2 && mouseY>=y-boxHeight/2)
     {
-        StepMania.currentScreen = targetScreen;
+        stepmania.currentScreen = targetScreen;
     }
   }
 }
@@ -460,7 +462,7 @@ class StartScreen extends Screen{
 }
   public void settings() {  size(400, 600); }
   static public void main(String[] passedArgs) {
-    String[] appletArgs = new String[] { "StepMania" };
+    String[] appletArgs = new String[] { "stepmania" };
     if (passedArgs != null) {
       PApplet.main(concat(appletArgs, passedArgs));
     } else {

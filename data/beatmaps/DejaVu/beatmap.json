@@ -1,0 +1,15 @@
+{
+  "BeatMapName" : "DejaVu",
+  "BeatMapCreator" : "Animelord9999",
+  "Artist" : "Animelord9999",
+  "SongName" : "Deja Vu",
+  "SoundFile" : "Audio.mp3",
+  "previewPoint" : 3,
+  "Difficulties" : [
+    "test"
+  ],
+  "Hitsound1" : "soft-hitfinish.wav",
+  "Hitsound2" : "soft-hitwhistle.mp3",
+  "Hitsound3" : "soft-hitwhistle.mp3",
+  "Hitsound4" : "soft-hitfinish.wav"
+}

@@ -19,7 +19,7 @@ public class GameplayScreen extends Screen{
     fill(outsideColor);
     rect(5 * width / 6, 0, width / 6, height);
     fill(judgingLineColor);
-    rect(1 * width / 6, height - StepMania.target, 4 * width / 6, 10);
+    rect(1 * width / 6, height - stepmania.target, 4 * width / 6, 10);
   }
 
   public int isDone(){
@@ -27,17 +27,17 @@ public class GameplayScreen extends Screen{
   }
 
   public void pressed(char c){
-    for(Note n : StepMania.enabledNotes){
-      if(c == StepMania.key1 && n.note == 1 && n.canClick()){
+    for(Note n : stepmania.enabledNotes){
+      if(c == stepmania.key1 && n.note == 1 && n.canClick()){
         n.clicked();
       }
-      if(c == StepMania.key2 && n.note == 2 && n.canClick()){
+      if(c == stepmania.key2 && n.note == 2 && n.canClick()){
         n.clicked();
       }
-      if(c == StepMania.key3 && n.note == 3 && n.canClick()){
+      if(c == stepmania.key3 && n.note == 3 && n.canClick()){
         n.clicked();
       }
-      if(c == StepMania.key4 && n.note == 4 && n.canClick()){
+      if(c == stepmania.key4 && n.note == 4 && n.canClick()){
         n.clicked();
       }
     }

@@ -10,7 +10,7 @@ public class screenSwitchButton extends Button
   {
     if(mouseX<=x+boxWidth/2 && mouseX>=x-boxWidth/2 && mouseY<=y+boxHeight/2 && mouseY>=y-boxHeight/2)
     {
-        StepMania.currentScreen = targetScreen;
+        stepmania.currentScreen = targetScreen;
     }
   }
 }
