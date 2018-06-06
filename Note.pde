@@ -32,7 +32,7 @@ public class Note implements GameObject{
 
   public void initialize(){
     speed = (float)(scrollSpeed / frameRate);
-    println(speed);
+    // println(speed);
     position = 0;
 
   }
@@ -40,7 +40,7 @@ public class Note implements GameObject{
   public void update(){
     if(millis() - StepMania.startTime > this.startTime && !loaded){
       enabled = true;
-      position = 0;
+      position = (float)(-size);
       loaded = true;
       StepMania.enabledNotes.add(this);
     }

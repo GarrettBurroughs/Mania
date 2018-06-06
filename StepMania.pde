@@ -53,6 +53,7 @@ void setup(){
   currentScreen.initObjects();
   counter = 1;
   startTime = millis();
+  println(startTime);
   BeatMap test = new BeatMap(this, "TestBeatmap", "hard.json");
   for(Note n : test.getNotes()){
     currentScreen.addObject(n);

@@ -4,7 +4,7 @@ public class BeatMap{
   String name;
   String artist;
   int previewPoint;
-  int scrollSpeed = 100;
+  int scrollSpeed = 200;
 
   public BeatMap(StepMania parent, String name, String difficulty){
     notes = new ArrayList();
