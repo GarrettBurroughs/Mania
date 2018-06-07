@@ -34,6 +34,7 @@ static double judgingScale = 100;
 static ArrayList<Note> enabledNotes;
 public Samples sample;
 public static SoundFile currentSong;
+public static int score = 0;
 
 public void setup(){
   // Set up processing vars
@@ -62,7 +63,7 @@ public void setup(){
   key4 = keyConfig.charAt(3);
 
 
-  currentScreen = new GameplayScreen();
+  currentScreen = new StartScreen();
   enabledNotes = new ArrayList();
 
   // double time, int note, double duration, double scrollSpeed, Samples sample
@@ -73,7 +74,7 @@ public void setup(){
   counter = 1;
   startTime = millis();
   println(startTime);
-  BeatMap test = new BeatMap(this, "TestBeatmap", "hard.json");
+  BeatMap test = new BeatMap(this, "DejaVu", "HD.json");
   for(Note n : test.getNotes()){
     currentScreen.addObject(n);
   }
@@ -83,6 +84,7 @@ public void draw(){
   currentScreen.update();
   currentScreen.display();
   currentScreen.renderObjects();
+  println(score);
 }
 
 public void keyPressed(){
@@ -92,6 +94,9 @@ public void keyPressed(){
 public void playSong(){
   println("Thread Running");
   currentSong.play();
+  while (true){
+    //currentSong.amp(1);
+  }
 }
 public class BeatMap{
   SoundFile song;
@@ -146,7 +151,7 @@ public abstract class Button implements GameObject
    int boxHeight;
    int fontSize = 24;
    Screen targetScreen;
-   PFont f;
+   PFont f = createFont("AgencyFB-Reg-48.ttf", 30);
 
    public Button(int x, int y, String text )
    {
@@ -222,6 +227,8 @@ public class GameplayScreen extends Screen{
     rect(5 * width / 6, 0, width / 6, height);
     fill(judgingLineColor);
     rect(1 * width / 6, height - stepmania.target, 4 * width / 6, 10);
+    fill(255);
+    text(stepmania.score, 10, 10);
   }
 
   public int isDone(){
@@ -311,12 +318,15 @@ public class Note implements GameObject{
         switch(note){
           case 1:
             sample.hitSound1.play();
+            sample.hitSound1.amp(.1f);
             break;
           case 2:
             sample.hitSound2.play();
+            sample.hitSound2.amp(.1f);
             break;
           case 3:
             sample.hitSound3.play();
+            sample.hitSound3.amp(.1f);
             break;
           case 4:
             sample.hitSound4.play();
@@ -325,6 +335,8 @@ public class Note implements GameObject{
             break;
       }
     }
+    stepmania.score += stepmania.judgingScale - accuracy();
+    fill(0, 255, 0);
   }
 
   public void render(){
@@ -347,7 +359,7 @@ public class Note implements GameObject{
           break;
       }
       if(canClick()){
-        fill(255, 255, 0);
+        // fill(255, 255, 0);
       }
       rect(((note) / 6.0f) * width, position, width/6, size);
     }
@@ -373,10 +385,10 @@ public class Samples{
     this.hitSound4 = hitSound4;
   }
 }
-public class screenSwitchButton extends Button
+public class ScreenSwitchButton extends Button
 {
   Screen targetScreen;
-  public screenSwitchButton(int x, int y, String text, Screen targetScreen )
+  public ScreenSwitchButton(int x, int y, String text, Screen targetScreen )
   {
     super( x,  y,  text );
     this.targetScreen = targetScreen;
@@ -444,12 +456,18 @@ class SongSelection implements GameObject{
 }
 class StartScreen extends Screen{
 
-  public void screenUpdate(){
+  public StartScreen(){
+    addObjects(
+        new ScreenSwitchButton(width/2, height/2, "Start", new GameplayScreen())
+      );
+  }
 
+  public void screenUpdate(){
+    fill(38, 10, 255);
   }
 
   public void display(){
-    
+
   }
 
   public int isDone(){

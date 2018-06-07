@@ -16,6 +16,7 @@ static double judgingScale = 100;
 static ArrayList<Note> enabledNotes;
 public Samples sample;
 public static SoundFile currentSong;
+public static int score = 0;
 
 void setup(){
   // Set up processing vars
@@ -44,7 +45,7 @@ void setup(){
   key4 = keyConfig.charAt(3);
 
 
-  currentScreen = new GameplayScreen();
+  currentScreen = new StartScreen();
   enabledNotes = new ArrayList();
 
   // double time, int note, double duration, double scrollSpeed, Samples sample
@@ -55,7 +56,7 @@ void setup(){
   counter = 1;
   startTime = millis();
   println(startTime);
-  BeatMap test = new BeatMap(this, "TestBeatmap", "hard.json");
+  BeatMap test = new BeatMap(this, "DejaVu", "HD.json");
   for(Note n : test.getNotes()){
     currentScreen.addObject(n);
   }
@@ -65,6 +66,7 @@ void draw(){
   currentScreen.update();
   currentScreen.display();
   currentScreen.renderObjects();
+  println(score);
 }
 
 void keyPressed(){
@@ -74,4 +76,7 @@ void keyPressed(){
 public void playSong(){
   println("Thread Running");
   currentSong.play();
+  while (true){
+    //currentSong.amp(1);
+  }
 }

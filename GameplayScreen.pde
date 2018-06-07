@@ -20,6 +20,8 @@ public class GameplayScreen extends Screen{
     rect(5 * width / 6, 0, width / 6, height);
     fill(judgingLineColor);
     rect(1 * width / 6, height - stepmania.target, 4 * width / 6, 10);
+    fill(255);
+    text(stepmania.score, 10, 10);
   }
 
   public int isDone(){

@@ -1,7 +1,7 @@
-public class screenSwitchButton extends Button
+public class ScreenSwitchButton extends Button
 {
   Screen targetScreen;
-  public screenSwitchButton(int x, int y, String text, Screen targetScreen )
+  public ScreenSwitchButton(int x, int y, String text, Screen targetScreen )
   {
     super( x,  y,  text );
     this.targetScreen = targetScreen;

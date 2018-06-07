@@ -7,7 +7,7 @@ public abstract class Button implements GameObject
    int boxHeight;
    int fontSize = 24;
    Screen targetScreen;
-   PFont f;
+   PFont f = createFont("AgencyFB-Reg-48.ttf", 30);
 
    public Button(int x, int y, String text )
    {

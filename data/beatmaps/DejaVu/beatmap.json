@@ -6,10 +6,11 @@
   "SoundFile" : "Audio.mp3",
   "previewPoint" : 3,
   "Difficulties" : [
-    "test"
+    "EZ",
+    "HD"
   ],
-  "Hitsound1" : "soft-hitfinish.wav",
+  "Hitsound1" : "soft-hitwhistle.mp3",
   "Hitsound2" : "soft-hitwhistle.mp3",
   "Hitsound3" : "soft-hitwhistle.mp3",
-  "Hitsound4" : "soft-hitfinish.wav"
+  "Hitsound4" : "soft-hitwhistle.mp3"
 }

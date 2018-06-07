@@ -64,12 +64,15 @@ public class Note implements GameObject{
         switch(note){
           case 1:
             sample.hitSound1.play();
+            sample.hitSound1.amp(.1);
             break;
           case 2:
             sample.hitSound2.play();
+            sample.hitSound2.amp(.1);
             break;
           case 3:
             sample.hitSound3.play();
+            sample.hitSound3.amp(.1);
             break;
           case 4:
             sample.hitSound4.play();
@@ -78,6 +81,8 @@ public class Note implements GameObject{
             break;
       }
     }
+    stepmania.score += stepmania.judgingScale - accuracy();
+    fill(0, 255, 0);
   }
 
   public void render(){
@@ -100,7 +105,7 @@ public class Note implements GameObject{
           break;
       }
       if(canClick()){
-        fill(255, 255, 0);
+        // fill(255, 255, 0);
       }
       rect(((note) / 6.0) * width, position, width/6, size);
     }
